@@ -474,9 +474,9 @@ figcaption {
 
 .result-layout {
   display: grid;
-  grid-template-columns: 0.94fr 1.06fr;
+  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
   gap: 30px;
-  align-items: stretch;
+  align-items: start;
 }
 
 .table-wrap {
@@ -540,8 +540,13 @@ tr.ours {
   background: #173029;
 }
 
+.radar-card img {
+  height: 280px;
+  padding: 12px;
+}
+
 .wide-result {
-  max-width: 760px;
+  max-width: 1000px;
   margin: 54px auto 0;
 }
 
