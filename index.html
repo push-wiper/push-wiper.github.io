@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Push-Wiper reformulates viscous stain cleaning as aggregation through segmented pushing trajectories."
+    />
+    <meta property="og:title" content="Push-Wiper" />
+    <meta
+      property="og:description"
+      content="Toward General-Purpose Robotic Cleaning across Varied Stains and Surfaces with Segmented Pushing Trajectories."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/images/framework.jpg" />
+    <title>Push-Wiper | General-Purpose Robotic Cleaning</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Push-Wiper home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Push-Wiper</span>
+      </a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+      <nav id="site-nav" aria-label="Page navigation">
+        <a href="#overview">Overview</a>
+        <a href="#videos">Videos</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#generalization">Generalization</a>
+        <a href="#citation">Citation</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="venue">Accepted to IROS 2026</p>
+          <h1>Push-Wiper</h1>
+          <p class="subtitle">
+            Toward General-Purpose Robotic Cleaning across Varied Stains and Surfaces with Segmented Pushing Trajectories
+          </p>
+
+          <div class="authors" aria-label="Authors">
+            <span>Renhao Lu<sup>1,2,&dagger;</sup></span>
+            <a href="https://thu-wangmx.github.io/" target="_blank" rel="noreferrer">Mingxin Wang<sup>1,&dagger;</sup></a>
+            <span>Chenyang Cao<sup>3</sup></span>
+            <span>Yang Yang<sup>1</sup></span>
+            <span>Guoping Pan<sup>1,2</sup></span>
+            <span>Kangkang Dong<sup>1</sup></span>
+            <span>Yi Cheng<sup>2</sup></span>
+            <span>Houde Liu<sup>1,2,*</sup></span>
+          </div>
+
+          <div class="affiliations">
+            <span><sup>1</sup>Tsinghua Shenzhen International Graduate School, Tsinghua University</span>
+            <span><sup>2</sup>Z-Lab, Zerith Robotics</span>
+            <span><sup>3</sup>University of Toronto</span>
+            <span><sup>&dagger;</sup>Equal contribution</span>
+            <span><sup>*</sup>Corresponding author</span>
+          </div>
+
+          <div class="hero-actions">
+            <a class="button primary" href="assets/paper/push-wiper.pdf" target="_blank">Paper PDF</a>
+            <a class="button" href="#videos">Videos</a>
+            <a class="button" href="#citation">BibTeX</a>
+          </div>
+        </div>
+
+        <figure class="hero-figure">
+          <img src="assets/images/framework.jpg" alt="Overview of the Push-Wiper framework" />
+          <figcaption>
+            From a single observation, Push-Wiper plans a segmented push, adapts it to the surface, and iterates until the stain is compact enough for post-processing.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="metrics" aria-label="Key results">
+        <div><strong>89.88</strong><span>overall cleaning score</span></div>
+        <div><strong>+130%</strong><span>up to baseline improvement</span></div>
+        <div><strong>99.25</strong><span>with post-processing</span></div>
+        <div><strong>93.42</strong><span>concave-surface score</span></div>
+      </section>
+
+      <section class="section overview" id="overview">
+        <div class="section-heading">
+          <p class="eyebrow">Overview</p>
+          <h2>Aggregate first. Finish clean.</h2>
+        </div>
+        <div class="overview-grid">
+          <div class="overview-lead">
+            <p>
+              Viscous stains resist conventional robotic cleaning: wiping spreads them, while aggressive scrubbing can damage the surface. Push-Wiper instead treats cleaning as a topological aggregation problem.
+            </p>
+          </div>
+          <div class="overview-copy">
+            <p>
+              A low-frequency Diffusion Policy predicts complete segmented pushing strokes from a binary stain map. An Arbitrary Surface Pose Interpolator and hybrid force-position controller then convert each planar action into a smooth, contact-aware 6D trajectory.
+            </p>
+            <p>
+              Iterative perception-planning-execution progressively contracts the stain into one compact region. Five post-processing primitives detach the residue and self-clean the sponge, completing the task without retraining for new stains or surface geometries.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="video-band" id="videos">
+        <div class="section">
+          <div class="section-heading light">
+            <p class="eyebrow">Video</p>
+            <h2>Cleaning is a sequence of deliberate pushes.</h2>
+          </div>
+          <figure class="feature-video">
+            <video controls muted playsinline preload="auto" poster="assets/images/poster-overview.jpg">
+              <source src="assets/videos/paper-overview.mp4" type="video/mp4" />
+            </video>
+            <figcaption>Push-Wiper overview: stain gathering, surface-aware execution, and post-processing.</figcaption>
+          </figure>
+
+          <div class="video-grid" aria-label="Representative real-robot trials">
+            <figure>
+              <video controls muted loop playsinline preload="auto" poster="assets/images/poster-demo-1.jpg">
+                <source src="assets/videos/demo-1.mp4" type="video/mp4" />
+              </video>
+              <figcaption><strong>Segmented gathering</strong><span>Iterative closed-loop cleaning</span></figcaption>
+            </figure>
+            <figure>
+              <video controls muted loop playsinline preload="auto" poster="assets/images/poster-demo-2.jpg">
+                <source src="assets/videos/demo-2.mp4" type="video/mp4" />
+              </video>
+              <figcaption><strong>Adaptive pushing</strong><span>Action sequences follow stain topology</span></figcaption>
+            </figure>
+            <figure>
+              <video controls muted loop playsinline preload="auto" poster="assets/images/poster-demo-3.jpg">
+                <source src="assets/videos/demo-3.mp4" type="video/mp4" />
+              </video>
+              <figcaption><strong>Physical execution</strong><span>Force-controlled surface interaction</span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section method" id="method">
+        <div class="section-heading">
+          <p class="eyebrow">Method</p>
+          <h2>Decoupling 2D aggregation from 3D surface geometry.</h2>
+        </div>
+
+        <div class="method-steps">
+          <article>
+            <span>01</span>
+            <h3>Perceive</h3>
+            <p>Abstract the current stain into a texture-free binary map at a fixed capture pose.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Plan</h3>
+            <p>Generate a complete 16-action pushing stroke in the compact space of x, y, and yaw.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Execute</h3>
+            <p>Use ASPI and 100 Hz hybrid force-position control to follow arbitrary surface geometry.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Finish</h3>
+            <p>Detach the gathered residue, clean the sponge, and perform the final wipe.</p>
+          </article>
+        </div>
+
+        <div class="figure-pair">
+          <figure class="paper-figure">
+            <img src="assets/images/segmented-pushing.jpg" alt="Examples of segmented pushing trajectories" />
+            <figcaption>Segmented pushing contracts multiple disconnected stain regions into one compact target.</figcaption>
+          </figure>
+          <figure class="paper-figure">
+            <img src="assets/images/post-processing.jpg" alt="Five Push-Wiper post-processing motion primitives" />
+            <figcaption>Rinsing, squeezing, dabbing, scraping, and final wiping complete the cleaning cycle.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="results-band" id="results">
+        <div class="section">
+          <div class="section-heading light">
+            <p class="eyebrow">Results</p>
+            <h2>High cleaning scores without secondary contamination.</h2>
+          </div>
+
+          <div class="result-layout">
+            <div class="table-wrap">
+              <table>
+                <caption>Cleaning score across ketchup and peanut butter trials</caption>
+                <thead>
+                  <tr><th>Method</th><th>Ketchup</th><th>Peanut butter</th><th>Overall</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th>Full-Cover</th><td>53.99</td><td>11.28</td><td>32.64</td></tr>
+                  <tr><th>PushAll-Onetime</th><td>58.04</td><td>31.99</td><td>44.98</td></tr>
+                  <tr class="ours"><th>Push-Wiper</th><td>92.30</td><td>87.46</td><td>89.88</td></tr>
+                </tbody>
+              </table>
+              <p class="table-note">Mean cleaning score over 20 trials per method and stain type.</p>
+            </div>
+
+            <figure class="paper-figure dark-figure">
+              <img src="assets/images/baseline-comparison.jpg" alt="Comparison of cleaning results across three methods" />
+              <figcaption>Full-Cover and PushAll-Onetime spread viscous material; Push-Wiper consolidates it.</figcaption>
+            </figure>
+          </div>
+
+          <figure class="wide-result">
+            <img src="assets/images/performance-radar.jpg" alt="Radar comparison of cleaning methods" />
+            <figcaption>Push-Wiper remains stable across simple and complex distributions of both evaluated viscous stains.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section generalization" id="generalization">
+        <div class="section-heading">
+          <p class="eyebrow">Zero-Shot Generalization</p>
+          <h2>New stains, new physical states, and unseen curved surfaces.</h2>
+          <p class="section-intro">
+            Training uses planar viscous-stain tasks. At test time, the same policy transfers to convex and concave geometries, solids, liquids, and novel viscous materials without additional data or retraining.
+          </p>
+        </div>
+
+        <figure class="generalization-hero">
+          <img src="assets/images/curved-surfaces.jpg" alt="Push-Wiper operating on unseen convex and concave surfaces" />
+          <figcaption>
+            ASPI keeps the end-effector normal aligned with unseen convex and concave surfaces, achieving scores of 91.45 and 93.42.
+          </figcaption>
+        </figure>
+
+        <div class="generalization-grid">
+          <figure class="paper-figure">
+            <img src="assets/images/viscous-stains.jpg" alt="Cleaning novel viscous stains" />
+            <figcaption><strong>94.42</strong> on combined unseen viscous stains.</figcaption>
+          </figure>
+          <figure class="paper-figure">
+            <img src="assets/images/unseen-objects.jpg" alt="Aggregation of unseen liquid and solid objects" />
+            <figcaption><strong>100.00</strong> on solids and <strong>92.62</strong> on liquids.</figcaption>
+          </figure>
+          <figure class="paper-figure">
+            <img src="assets/images/trajectory-comparison.jpg" alt="Comparison of segmented pushing trajectories" />
+            <figcaption>Trajectory length and orientation adapt to local stain topology.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="post-band">
+        <div class="section post-inner">
+          <div>
+            <p class="eyebrow">Final Step</p>
+            <h2>Post-processing lifts the average score from 89.44 to 99.25.</h2>
+          </div>
+          <dl>
+            <div><dt>Ketchup</dt><dd>100.00 <span>+6.66%</span></dd></div>
+            <div><dt>Peanut butter</dt><dd>98.51 <span>+15.73%</span></dd></div>
+            <div><dt>Average</dt><dd>99.25 <span>+10.97%</span></dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="section citation" id="citation">
+        <div class="section-heading">
+          <p class="eyebrow">Citation</p>
+          <h2>BibTeX</h2>
+        </div>
+        <div class="citation-box">
+          <pre><code id="bibtex">@inproceedings{lu2026pushwiper,
+  title     = {Push-Wiper: Toward General-Purpose Robotic Cleaning across Varied Stains and Surfaces with Segmented Pushing Trajectories},
+  author    = {Lu, Renhao and Wang, Mingxin and Cao, Chenyang and Yang, Yang and Pan, Guoping and Dong, Kangkang and Cheng, Yi and Liu, Houde},
+  booktitle = {IEEE/RSJ International Conference on Intelligent Robots and Systems},
+  year      = {2026}
+}</code></pre>
+          <button class="copy-button" type="button" data-copy-target="bibtex">Copy BibTeX</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Push-Wiper · IROS 2026</p>
+      <a href="#top">Back to top</a>
+    </footer>
+  </body>
+</html>
